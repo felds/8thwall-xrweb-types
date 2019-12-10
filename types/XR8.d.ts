@@ -1,4 +1,8 @@
 declare namespace XR8 {
+  type Module = {
+    name: string;
+    [key: string]: any;
+  };
   type ModuleOrName =
     | string
     | {
@@ -118,6 +122,8 @@ declare namespace XR8 {
 
   /**
    * Pause the current XR session. While paused, the camera feed is stopped and device motion is not tracked.
+   *
+   * @see https://www.8thwall.com/docs/web/#xr8pause
    */
   function pause(): void;
 
@@ -131,7 +137,14 @@ declare namespace XR8 {
    *
    * @param moduleName The name of a module.
    */
-  function removeCameraPipelineModule(moduleName: ModuleOrName): void;
+  function removeCameraPipelineModule(moduleName: string): void;
+
+  /**
+   * Removes a module from the camera pipeline.
+   *
+   * @param moduleName An object with a `.name` property.
+   */
+  function removeCameraPipelineModule(moduleName: Module): void;
 
   /**
    * Remove multiple camera pipeline modules.
@@ -154,9 +167,9 @@ declare namespace XR8 {
    */
   function run(
     canvas: HTMLCanvasElement,
-    webgl2: boolean,
-    ownRunLoop: boolean,
-    cameraConfig: unknown
+    webgl2?: boolean,
+    ownRunLoop?: boolean,
+    cameraConfig?: unknown
   ): void;
 
   /**
