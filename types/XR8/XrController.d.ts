@@ -62,6 +62,11 @@ declare namespace XR8.XrController {
     facing?: Vec4;
   };
 
+  type CameraPipelineModule = XR8.CameraPipelineModule & {
+    name: "reality";
+    requiredPermissions: ["camera", "deviceorientation", "devicemotion"];
+  };
+
   /**
    * Configures what processing is performed by `XrController` (may have performance implications).
    *
@@ -91,9 +96,8 @@ declare namespace XR8.XrController {
    * Creates a camera pipeline module that, when installed, receives callbacks on when the camera has started, camera proessing events, and other state changes. These are used to calculate the camera's position.
    *
    * @see https://www.8thwall.com/docs/web/#xr8xrcontrollerpipelinemodule
-   * @todo wtf is that return?
    */
-  function pipelineModule(): any;
+  function pipelineModule(): CameraPipelineModule;
 
   /**
    * Repositions the camera to the origin/facing direction specified by `updateCameraProjectionMatrix` and restart tracking.
